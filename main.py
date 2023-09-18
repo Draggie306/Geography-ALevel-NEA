@@ -304,6 +304,6 @@ if not repl_save:
     print("saving to local directory as {}".format(uuid_to_use))
     wordcloud.to_file(f"D:\\OneDrive - Notre Dame High School\\[nea] Geo\\word cloud\\python_wordcloud_{uuid_to_use}.png")
 else:
-    print(f'Saving on Repl filesystem in generations folder as ""{uuid_to_use}"')
+    print(f'Saving on Repl filesystem in generations folder as "{uuid_to_use}"')
     wordcloud.to_file(f"generations/python_wordcloud_{uuid_to_use}.png")
 plt.show()
