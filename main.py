@@ -24,6 +24,10 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
 @app.route('/generate_word_cloud', methods=['POST'])
 def generate_word_cloud():
     width = 1920
@@ -141,4 +145,4 @@ def generate_word_cloud():
     
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=random.randint(2000,9000))

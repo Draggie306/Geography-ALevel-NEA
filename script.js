@@ -11,7 +11,7 @@ form.addEventListener('submit', (event) => {
   output.innerHTML = "Loading responce...";
     
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/generate_word_cloud');
+  xhr.open('POST', 'https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.onload = () => {
     if (xhr.status === 200) {
