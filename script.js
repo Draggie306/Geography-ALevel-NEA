@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const output = document.querySelector('#output');
+    const loadingText = document.getElementById('loading_text');
     let shouldStop = false;
 
     // displays elapsed time in seconds, recursively calls itself every 100ms
     function loadingTextTime(elapsed) {
+        // elapsed = elapsed.toFixed(2);
         if (shouldStop) {
-            console.log(`Finished in ${elapsed} seconds`);
+            console.log(`Finished in ${elapsed.toFixed(1)} seconds!`);
+            loadingText.innerHTML = `Finished in ${elapsed.toFixed(1)} seconds!`;
         } else {
-            console.log(`Waiting for server to generate image... ${elapsed} seconds elapsed`);
+            console.log(`Waiting for server to generate image... ${elapsed.toFixed(1)} seconds elapsed`);
+            loadingText.innerHTML = `Waiting for server to generate image... ${elapsed.toFixed(1)} seconds elapsed`;
             setTimeout(() => {
                 loadingTextTime(elapsed + 0.1);
             }, 100);
@@ -17,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        shouldStop = false;
 
         const dataText = form.elements['data_text'].value;
         const width = form.elements['width'].value;
@@ -24,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxFontSize = form.elements['max_font_size'].value;
         output.innerHTML = "Loading response...";
         // start loading text timer
-        loadingTextTime(0, false);
+        loadingTextTime(0);
 
         try {
             const response = await fetch('https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud', {

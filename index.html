@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="description" content="Word Cloud Generator">
     <meta name="author" content="Draggie306">
@@ -8,37 +8,36 @@
     <title>Word Cloud Generator</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <h1 class="animated_rainbow_1">NEA Word Cloud Generator!</h1>
-      <p><br>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below! If you're unsure about the dimensions and other fields, leave them default, it is a pretty high-res generation but you can lower them if you want for faster generation, or increase for higher quality. 
+    <p><br>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below! If you're unsure about the dimensions and other fields, leave them default, it is a pretty high-res generation but you can lower them if you want for faster generation, or increase for higher quality. 
         <br><br>Then click generate and it will generate a word cloud for you.
         <br><br>You can split the words up with commas, spaces, new lines or any combination of the three, the code should be smart enough to figure it out.
         <br><br>It will also remove any punctuation and numbers.
-      </p>
+    </p>
     <form>
-      <label for="data_text">Words to wordcloudify:</label>
-      <textarea id="data_text" name="data_text"></textarea>
-      <label for="width">Image Width:</label>
-      <input type="number" id="width" name="width" value="1920">
-      <label for="height">Image Height:</label>
-      <input type="number" id="height" name="height" value="1080">
-      <label for="max_font_size">Max Font Size:</label>
-      <p><i>The size of the largest word in the cloud depends on the number of its occurrences in the input data.</i></p>
-      <input type="number" id="max_font_size" name="max_font_size" value="300">
-      <label for="lambda_color_func">[Advanced] Lambda Color Function:</label>
-      <input type="text" id="lambda_func" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
-      <button type="submit">Generate Word Cloud</button>
+        <label for="data_text">Words to wordcloudify:</label>
+        <textarea id="data_text" name="data_text"></textarea>
+        <label for="width">Image Width:</label>
+        <input type="number" id="width" name="width" value="1920">
+        <label for="height">Image Height:</label>
+        <input type="number" id="height" name="height" value="1080">
+        <label for="max_font_size">Max Font Size:</label>
+        <p><i>The size of the largest word in the cloud depends on the number of its occurrences in the input data.</i></p>
+        <input type="number" id="max_font_size" name="max_font_size" value="300">
+        <label for="lambda_color_func">[Advanced] Lambda Color Function:</label>
+        <input type="text" id="lambda_func" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
+        <button type="submit">Generate Word Cloud</button>
     </form>
     <div id="loading">
-      <p id="loading_text"></p> <!-- add text from script.js as needed -->
+        <p id="loading_text"></p> <!-- add text from script.js as needed -->
     </div>  
-    <div id="output">
-        
+    <div id="output">    
     </div>
 
     <section id="footer">
-      <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>
+        <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>
     </section>
-  </body>
+</body>
 </html>
