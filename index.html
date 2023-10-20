@@ -6,9 +6,13 @@
   </head>
   <body>
     <h1>Word Cloud Generator</h1>
-      <p>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below, can be comma separated if you want</p>
+      <p>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below, can be comma separated if you want
+        <br>Then click generate and it will generate a word cloud for you.
+        <br>You can split the words up with commas, spaces, new lines or any combination of the three, the code should be smart enough to figure it out.
+        <br>It will also remove any punctuation and numbers.
+      </p>
     <form>
-      <label for="data_text">Words to wordcloudify</label>
+      <label for="data_text">Words to wordcloudify:</label>
       <textarea id="data_text" name="data_text"></textarea>
       <label for="width">Width:</label>
       <input type="number" id="width" name="width" value="1920">
@@ -19,6 +23,9 @@
       <button type="submit">Generate Word Cloud</button>
     </form>
     <div id="output"></div>
-    <script src="script.js"></script>
+
+    <section id="footer">
+      <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>
+    </section>
   </body>
 </html>

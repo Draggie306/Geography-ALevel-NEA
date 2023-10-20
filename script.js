@@ -23,7 +23,12 @@ form.addEventListener('submit', async (event) => {
             const result = await response.json();
             // get wordcloud base64 image from json response "wordcloud" field
             wordcloud_result = result.wordcloud;
-            output.innerHTML = `<img src="${wordcloud_result}" alt="Word cloud image" />`;
+            let base64Image = wordcloud_result.split(';base64,').pop();
+            // create image element with base64 image
+            let image = document.createElement('img');
+            image.src = `data:image/png;base64,${base64Image}`;
+            // set output to image
+            output.innerHTML = ` <a href="${wordcloud_result}" download="wordcloud.png">Download Word Cloud</a>`;
         } else {
             // get json "message" field if it exists, otherwise use the status text
             const result = await response.json();
