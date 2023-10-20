@@ -70,7 +70,7 @@ def generate_word_cloud():
         wordcloud = WordCloud(
             max_font_size=max_font_size,  # more common words should be the biggest
             # min_font_size=50,   # less common words should be the smallest
-            background_color="grey",
+            background_color="white",
             width=width,  # 8k monitor
             height=height,  # 8k monitor
             max_words=1000,     # we want to see all words
@@ -81,9 +81,9 @@ def generate_word_cloud():
             #color_func=lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)
             ).generate(text)
 
-        plt.figure(dpi=200)
+        """plt.figure(dpi=200)
         plt.imshow(wordcloud, interpolation="bilinear")
-        plt.axis("off")
+        plt.axis("off")"""
 
         # uuid_to_use = uuid.uuid4()
         # TODO: Change from uuid to time + DateTime
@@ -100,6 +100,7 @@ def generate_word_cloud():
         base64wordcloud = base64.b64encode(open(f"generations/python_wordcloud_{uuid_to_use}.png", 'rb').read())
         base64wordcloud = base64wordcloud.decode('utf-8')
 
+        print("Action performed successfully")
         return jsonify({
             "error": False,
             "message": "Successfully generated word cloud",

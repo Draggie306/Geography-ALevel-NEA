@@ -1,23 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const output = document.querySelector('#output');
-
+    let shouldStop = false;
 
     // displays elapsed time in seconds, recursively calls itself every 100ms
-    function loadingTextTime(elapsed, is_end) {
-        const text_loading = document.getElementById("loading_text");
-        if (is_end) {
-            // to round to 1 decimal place
-            elapsed = elapsed.toFixed(1);
-            text_loading.innerHTML = `Finished in ${elapsed} seconds`;
+    function loadingTextTime(elapsed) {
+        if (shouldStop) {
+            console.log(`Finished in ${elapsed} seconds`);
         } else {
-            // to round to 1 decimal place
-            text_loading.innerHTML = `Waiting for server to generate image... ${elapsed.toFixed(1)} seconds`;
-            if (!is_end) {
-                setTimeout(() => {
-                    loadingTextTime(elapsed + 0.1, false);
-                }, 100);
-            }
+            console.log(`Waiting for server to generate image... ${elapsed} seconds elapsed`);
+            setTimeout(() => {
+                loadingTextTime(elapsed + 0.1);
+            }, 100);
         }
     }
 
@@ -44,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 const result = await response.json();
                 // stop loading text timer
-                loadingTextTime(0, true);
+                shouldStop = true;
                 // get wordcloud base64 image from json response "wordcloud" field
                 wordcloud_result = result.wordcloud;
                 let base64Image = wordcloud_result.split(';base64,').pop();
@@ -57,11 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // output.appendChild(image);
                 output.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="max-width: 70%; max-height: 70%;">`;
             } else {
+                shouldStop = true;
                 // get json "message" field if it exists, otherwise use the status text
                 const result = await response.json();
                 output.innerHTML = `Error generating word cloud, server says: ${result.message || response.statusText}`;
             }
         } catch (error) {
+            shouldStop = true;
             console.error('Error:', error);
             // get json "message" field if it exists, otherwise use the status text
             output.innerHTML = `Error generating word cloud! ${error.message || error}`;
