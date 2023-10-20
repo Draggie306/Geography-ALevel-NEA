@@ -3,10 +3,11 @@
   <head>
     <title>Word Cloud Generator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="/script.js"></script>
   </head>
   <body>
     <h1>Word Cloud Generator</h1>
-      <p>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below, can be comma separated if you want
+      <p>This web interface has beem made in 20 minutes so it's not the prettiest.<br>Enter the words below! If you're unsure about the dimensions and other fields, leave them default, it is a pretty high-res generation but you can lower them if you want for faster generation, or increase for higher quality. 
         <br>Then click generate and it will generate a word cloud for you.
         <br>You can split the words up with commas, spaces, new lines or any combination of the three, the code should be smart enough to figure it out.
         <br>It will also remove any punctuation and numbers.
@@ -20,6 +21,8 @@
       <input type="number" id="height" name="height" value="1080">
       <label for="max_font_size">Max Font Size:</label>
       <input type="number" id="max_font_size" name="max_font_size" value="300">
+      <label for="lambda_color_func">[Advanced] Lambda function to pass to genrator:</label>
+      <input type="text" id="lambda_func" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
       <button type="submit">Generate Word Cloud</button>
     </form>
     <div id="output"></div>
