@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const output = document.querySelector('#output');
-    
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-    
+
         const dataText = form.elements['data_text'].value;
         const width = form.elements['width'].value;
         const height = form.elements['height'].value;
         const maxFontSize = form.elements['max_font_size'].value;
         output.innerHTML = "Loading response...";
-    
+
         try {
             const response = await fetch('https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud', {
                 method: 'POST',
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ data_text: dataText, width: width, height: height, max_font_size: maxFontSize })
             });
-    
+
             if (response.ok) {
                 const result = await response.json();
                 // get wordcloud base64 image from json response "wordcloud" field
@@ -28,8 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // create image element with base64 image
                 let image = document.createElement('img');
                 image.src = `data:image/png;base64,${base64Image}`;
-                // set output to image
-                output.innerHTML = ` <a href="${wordcloud_result}" download="wordcloud.png">Download Word Cloud</a>`;
+                // add image to output
+                output.innerHTML = "";
+                output.appendChild(image);
+
             } else {
                 // get json "message" field if it exists, otherwise use the status text
                 const result = await response.json();
