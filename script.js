@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadingTextTime(elapsed + 0.1, false);
             }, 100);
         }
+    }
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -61,4 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
             output.innerHTML = `Error generating word cloud! ${error.message || error}`;
         }
     });
-}});
+});
