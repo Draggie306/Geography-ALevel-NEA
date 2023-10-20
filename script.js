@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud', {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ data_text: dataText, width: width, height: height, max_font_size: maxFontSize })
             });
@@ -30,7 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 image.src = `data:image/png;base64,${base64Image}`;
                 // add image to output
                 output.innerHTML = "";
-                output.appendChild(image);
+                // scale image to fit screen
+                // output.appendChild(image);
+                output.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="max-width: 70%; max-height: 70%;">`;
+
 
             } else {
                 // get json "message" field if it exists, otherwise use the status text
