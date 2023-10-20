@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // displays elapsed time in seconds, recursively calls itself every 100ms
     function loadingTextTime(elapsed, is_end) {
-        const text_loading = document.querySelector('loading_text');
+        const text_loading = document.getElementById("loading_text");
         if (is_end) {
             text_loading.innerHTML = `Finished in ${elapsed} seconds`;
         } else {
@@ -61,5 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
             output.innerHTML = `Error generating word cloud! ${error.message || error}`;
         }
     });
-});
-
+}});
