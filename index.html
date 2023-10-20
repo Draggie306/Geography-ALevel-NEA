@@ -29,7 +29,12 @@
       <input type="text" id="lambda_func" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
       <button type="submit">Generate Word Cloud</button>
     </form>
-    <div id="output"></div>
+    <div id="loading">
+      <p id="loading_text"></p> <!-- add text from script.js as needed -->
+    </div>  
+    <div id="output">
+        
+    </div>
 
     <section id="footer">
       <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>

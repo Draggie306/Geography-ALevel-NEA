@@ -2,6 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const output = document.querySelector('#output');
 
+
+    // displays elapsed time in seconds, recursively calls itself every 100ms
+    function loadingTextTime(elapsed, is_end) {
+        const text_loading = document.querySelector('loading_text');
+        if (is_end) {
+            text_loading.innerHTML = `Finished in ${elapsed} seconds`;
+        } else {
+            text_loading.innerHTML = `Waiting for server to generate image... ${elapsed} seconds elapsed`;
+            setTimeout(() => {
+                loadingTextTime(elapsed + 0.1, false);
+            }, 100);
+        }
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -10,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = form.elements['height'].value;
         const maxFontSize = form.elements['max_font_size'].value;
         output.innerHTML = "Loading response...";
+        // start loading text timer
+        loadingTextTime(0, false);
 
         try {
             const response = await fetch('https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud', {
@@ -22,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const result = await response.json();
+                // stop loading text timer
+                loadingTextTime(0, true);
                 // get wordcloud base64 image from json response "wordcloud" field
                 wordcloud_result = result.wordcloud;
                 let base64Image = wordcloud_result.split(';base64,').pop();
@@ -33,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // scale image to fit screen
                 // output.appendChild(image);
                 output.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="max-width: 70%; max-height: 70%;">`;
-
-
             } else {
                 // get json "message" field if it exists, otherwise use the status text
                 const result = await response.json();
@@ -47,3 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
