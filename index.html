@@ -1,1 +1,23 @@
-hi!
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word Cloud Generator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Word Cloud Generator</h1>
+    <form>
+      <label for="data_text">Data Text:</label>
+      <textarea id="data_text" name="data_text"></textarea>
+      <label for="width">Width:</label>
+      <input type="number" id="width" name="width" value="1920">
+      <label for="height">Height:</label>
+      <input type="number" id="height" name="height" value="1080">
+      <label for="max_font_size">Max Font Size:</label>
+      <input type="number" id="max_font_size" name="max_font_size" value="300">
+      <button type="submit">Generate Word Cloud</button>
+    </form>
+    <div id="output"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

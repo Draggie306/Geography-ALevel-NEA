@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+label {
+  margin-top: 1rem;
+}
+
+textarea, input[type="number"] {
+  margin-left: 1rem;
+}
+
+button {
+  margin-top: 2rem;
+}
+
+#output {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
