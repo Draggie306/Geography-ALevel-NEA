@@ -7,12 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadingTextTime(elapsed, is_end) {
         const text_loading = document.getElementById("loading_text");
         if (is_end) {
+            // to round to 1 decimal place
+            elapsed = elapsed.toFixed(1);
             text_loading.innerHTML = `Finished in ${elapsed} seconds`;
         } else {
-            text_loading.innerHTML = `Waiting for server to generate image... ${elapsed} seconds elapsed`;
-            setTimeout(() => {
-                loadingTextTime(elapsed + 0.1, false);
-            }, 100);
+            // to round to 1 decimal place
+            text_loading.innerHTML = `Waiting for server to generate image... ${elapsed.toFixed(1)} seconds`;
+            if (!is_end) {
+                setTimeout(() => {
+                    loadingTextTime(elapsed + 0.1, false);
+                }, 100);
+            }
         }
     }
 
