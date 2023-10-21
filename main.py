@@ -36,6 +36,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def hello_world():
     return 'Hello, World!'
 
+
+@app.route('/ping')
+def pong():
+    return 'Pong!'
+
+
 @app.route('/generate_word_cloud', methods=['POST'])
 @cross_origin()
 def generate_word_cloud():
@@ -53,7 +59,6 @@ def generate_word_cloud():
                 "error": True,
                 "message": "Invalid literal value type, please use numbers"
             }), 403
-
 
         data = request.json
         words = re.findall(r'\b\w+\b', data.get('data_text', '').lower())
@@ -73,14 +78,13 @@ def generate_word_cloud():
             background_color="white",
             width=width,  # 8k monitor
             height=height,  # 8k monitor
-            max_words=1000,     # we want to see all words
+            max_words=1000,  # we want to see all words
             collocations=True,
             collocation_threshold=80,
-            normalize_plurals=True,    # removes plurals - better for word cloud
-            prefer_horizontal=0.85,  # 80% chance of horizontal, which is easier to read
+            normalize_plurals=True,  # removes plurals - better for word cloud
+            prefer_horizontal= 0.85,  # 80% chance of horizontal, which is easier to read
             #color_func=lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)
-            ).generate(text)
-
+        ).generate(text)
         """plt.figure(dpi=200)
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")"""
@@ -96,8 +100,7 @@ def generate_word_cloud():
             print(f'Saving on filesystem in generations folder as "{uuid_to_use}"')
             wordcloud.to_file(f"generations/python_wordcloud_{uuid_to_use}.png")
 
-
-        base64wordcloud = base64.b64encode(open(f"generations/python_wordcloud_{uuid_to_use}.png", 'rb').read())
+        base64wordcloud = base64.b64encode(open(f"generations/python_wordcloud_{uuid_to_use}.png",'rb').read())
         base64wordcloud = base64wordcloud.decode('utf-8')
 
         print("Action performed successfully")
@@ -110,9 +113,10 @@ def generate_word_cloud():
         print(e)
         print(traceback.format_exc())
         return jsonify({
-                "error": True,
-                "message": f"Error generating response: {e}\n\n{traceback.format_exc()}"
-            }), 500
+            "error": True,
+            "message": f"Error generating response: {e}\n\n{traceback.format_exc()}"
+        }), 500
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=random.randint(2000,9000))
+    app.run(host='0.0.0.0', port=random.randint(2000, 9000))

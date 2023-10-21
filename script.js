@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingText = document.getElementById('loading_text');
     let shouldStop = false;
 
+    try {
+        console.log("Attempting to wake up server")
+        await fetch("https://geog-nea-wordcloud.draggie.repl.co/ping", {
+            method: 'GET',
+        });
+        console.log("Server seems to be awake")
+    } catch (error) {
+        console.error("Ping error:", error);
+    }
+    
     // displays elapsed time in seconds, recursively calls itself every 100ms
     function loadingTextTime(elapsed) {
         // elapsed = elapsed.toFixed(2);
