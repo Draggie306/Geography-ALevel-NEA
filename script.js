@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         console.log("Attempting to wake up server")
-        await fetch("https://geog-nea-wordcloud.draggie.repl.co/ping", {
+        fetch("https://geog-nea-wordcloud.draggie.repl.co/ping", {
             method: 'GET',
         });
         console.log("Server seems to be awake")
