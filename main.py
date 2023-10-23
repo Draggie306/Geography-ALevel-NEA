@@ -117,6 +117,10 @@ def generate_word_cloud():
             "message": f"Error generating response: {e}\n\n{traceback.format_exc()}"
         }), 500
 
+@app.route("/lily")
+def lily_cloud():
+    
+    return 
 
 @app.route('/.git')
 def go_away():
