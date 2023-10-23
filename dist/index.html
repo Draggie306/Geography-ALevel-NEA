@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Create stunning word clouds online with our free Word Cloud Generator. Design custom word art effortlessly.">
-    <meta name="author" content="NEA Word Cloud Generator">
+    <meta name="description" content="Create stunning word clouds online for free. Enter your words, customise dimensions, and generate beautiful word art instantly. Try it now!">
+    <meta name="keywords" content="free word cloud generator, word cloud creator online, word cloud generator, create word clouds, word art generator">
+    <meta name="author" content="Draggie306 | iBaguette.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Word Cloud Generator - Create Word Cloud Online</title>
+    <title>Free Word Cloud Generator Online - Create Word Clouds</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Create Beautiful Word Clouds</h1>
-    <p>Welcome to our free Word Cloud Generator! Easily create custom word art in minutes. Enter your words below, customize dimensions and click generate. It's that simple!</p>
+    <h1 class="animated_rainbow_1">Word Cloud Generator</h1>
+    <p><br>This web interface was created for easy word cloud generation. Enter your words below. You can separate words with commas, spaces, or new lines. Click generate to create your unique word cloud. Customise dimensions for high-res images, or prefer faster generation. Whether it's for educational purposes, creative projects, or data analysis, our word cloud generator has you covered.</p>
+    </p>
     <form>
-        <label for="data_text">Words to Wordcloudify:</label>
-        <textarea id="data_text" name="data_text" placeholder="Enter words separated by commas, spaces, or new lines"></textarea>
+        <label for="data_text">Enter Words for Word Cloud:</label>
+        <textarea id="data_text" name="data_text" placeholder="Type or paste your words here"></textarea>
         <label for="width">Image Width:</label>
         <input type="number" id="width" name="width" value="1920">
         <label for="height">Image Height:</label>
         <input type="number" id="height" name="height" value="1080">
         <label for="max_font_size">Max Font Size:</label>
-        <p><i>The size of the largest word depends on its occurrences.</i></p>
+        <p><i>The size of the largest word in the cloud depends on its occurrences in the input data.</i></p>
         <input type="number" id="max_font_size" name="max_font_size" value="300">
-        <label for="lambda_func">[Advanced] Lambda Colour Function:</label>
-        <input type="text" id="lambda_func" name="lambda_func" placeholder='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
+        <label for="lambda_color_func">[Advanced] Lambda Colour Function:</label>
+        <input type="text" id="lambda_func" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
         <button type="submit">Generate Word Cloud</button>
     </form>
     <div id="loading">
         <p id="loading_text"></p>
     </div>  
-    <div id="output"><p>Word cloud will appear here</p></div>
+    <div id="output"><p>Your word cloud will appear here</p></div>
 
     <section id="footer">
         <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>

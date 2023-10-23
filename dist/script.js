@@ -1,3 +1,5 @@
+const backend_api = "https://geog-nea-wordcloud.draggie.repl.co"
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const output = document.querySelector('#output');
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         console.log("Attempting to wake up server")
-        fetch("https://geog-nea-wordcloud.draggie.repl.co/ping", {
+        fetch(`${backend_api}/ping`, {
             method: 'GET',
         });
         console.log("Server seems to be awake")
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingTextTime(0);
 
         try {
-            const response = await fetch('https://geog-nea-wordcloud.draggie.repl.co/generate_word_cloud', {
+            const response = await fetch(`${backend_api}/generate_word_cloud`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
