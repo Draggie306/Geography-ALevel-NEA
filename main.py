@@ -118,5 +118,10 @@ def generate_word_cloud():
         }), 500
 
 
+@app.route('/.git')
+def go_away():
+    return 'token="GO_AWAY_SCREW_YOURSELF"'
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=random.randint(2000, 9000))
