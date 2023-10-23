@@ -1,4 +1,4 @@
-const backend_api = "https://geog-nea-wordcloud.draggie.repl.co"
+const backend_api = "https://wordcloud-backend.ibaguette.com"
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
