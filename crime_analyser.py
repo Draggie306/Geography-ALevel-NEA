@@ -56,7 +56,7 @@ total_crime_count = sum(crime_counts.values())
 
 print("\n\nAnalytics:")
 print(f"Found {matched_records:,} crime records across {total_months} months.")
-print(f"{len(crime_counts)} different crime types matched the LSOA.\n")
+print(f"{len(crime_counts)} different crime types matched the LSOA code {lsoa_code_to_filter}.")
 print(f"Total crimes in Norfolk: {total_crimes:,}\n\n")
 
 print("Crime Type\t\t\tTotal Count\t\tAverage crimes/month")
