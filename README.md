@@ -10,8 +10,10 @@ Now also includes "crime_analyser.py" which is a script that summarises the data
 
 ## How to run
 
-The wordcloud generator is a python server that handles requests from the client and generates a wordcloud based on the data sent from the client. 
+The wordcloud generator is a Python server that handles requests from the client and generates a wordcloud based on the data sent from the client. 
 You can view it at [https://wordcloud.pages.dev](https://wordcloud.pages.dev).
+
+The Replit instance that this is running on is available here: [https://replit.com/@Draggie/Geog-NEA-Wordcloud](https://replit.com/@Draggie/Geog-NEA-Wordcloud)
 
 ## How to run locally
 
@@ -19,7 +21,7 @@ Firstly, clone this repository with `git clone https://github.com/Draggie306/Geo
 
 Then, run `pip -r requirements.txt` to install dependencies.
 
-Make sure the code has bool `repl_save` to `True` if you're running on a linux distro like Replit
+Make sure the code has bool `repl_save` to `True` if you're running on a Linux distro like Replit
 
 You might want to change the parameters in the `WordCloud` function from an 8K output to something smaller like:
 
@@ -30,7 +32,7 @@ You might want to change the parameters in the `WordCloud` function from an 8K o
     background_color="white",
 ```
 
-Change the code to not have any flask stuff - just the wordcloud generation (should be fairly easy to do)
+Change the code to not have any Flask stuff - just the wordcloud generation (should be fairly easy to do)
 Pass in the data you want to generate the wordcloud from as a string and magic should happen
 
 # Crime Analyser
@@ -43,7 +45,7 @@ Firstly, clone this repository with `git clone https://github.com/Draggie306/Geo
 
 The only dependencies are os, csv and collections, so you should be able to run it without installing anything
  
-Currently there is no support for changing of directories so you will have to change the folder_path variable in the for loop to the directory of the data set you want to analyse
+Currently, there is no support for changing directories so you will have to change the folder_path variable in the for loop to the directory of the data set you want to analyse
 
 Go to https://data.police.uk/data/ and download the data set you want to analyse, and unzip it into the directory you have hardcoded into the script.
 
