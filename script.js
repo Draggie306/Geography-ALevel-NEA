@@ -1,3 +1,5 @@
+// Last updated: 10/12/2023 22:34
+
 const backend_api = "https://wordcloud-backend.ibaguette.com"
 
 document.addEventListener('DOMContentLoaded', () => {
