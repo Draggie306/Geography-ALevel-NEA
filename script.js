@@ -31,6 +31,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    var colorPickerContainer = document.getElementById("colorPickerContainer");
+    var colorPickerVariationContainer = document.getElementById("colorPickerVariationContainer");
+
+    // Create a color picker and a number input for the randomness variation
+    var colorPicker = document.createElement("input");
+    colorPicker.type = "color";
+    colorPicker.value = "#00acff";
+    colorPicker.id = "colorPicker";
+
+    colorPickerContainer.appendChild(colorPicker);
+
+    var variationInput = document.createElement("input");
+    variationInput.type = "number";
+    variationInput.min = "0";
+    variationInput.max = "255";
+    variationInput.value = "10";
+    variationInput.id = "variationInput";
+
+    colorPickerVariationContainer.appendChild(variationInput);
+
+
+    // Function to convert a hex color to RGB
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         shouldStop = false;
@@ -39,6 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const width = form.elements['width'].value;
         const height = form.elements['height'].value;
         const maxFontSize = form.elements['max_font_size'].value;
+        const color = document.getElementById("colorPicker").value;
+        const variation = document.getElementById("variationInput").value;
+        // Convert the color to RGB
+        var rgb = hexToRgb(color);
+
         output.innerHTML = "Loading response...";
         // start loading text timer
         loadingTextTime(0);
@@ -49,7 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ data_text: dataText, width: width, height: height, max_font_size: maxFontSize })
+                body: JSON.stringify({
+                    data_text: dataText,
+                    width: width,
+                    height: height,
+                    max_font_size: maxFontSize,
+                    r: rgb.r, 
+                    g: rgb.g, 
+                    b: rgb.b, 
+                    variation: variation 
+                })
             });
 
             if (response.ok) {
@@ -67,6 +112,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 // scale image to fit screen
                 // output.appendChild(image);
                 output.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="max-width: 70%; max-height: 70%;">`;
+                
+                var bonusButtons = document.getElementById("bonusButtons"); // Download and Copy buttons
+                bonusButtons.innerHTML = ""; // Clear the buttons
+                // Create a download button
+                var downloadButton = document.createElement("button");
+                downloadButton.innerHTML = "Save";
+                var currentUnixTime = Math.round((new Date()).getTime() / 1000);
+
+                downloadButton.id = "downloadButton";
+                downloadButton.onclick = function() {
+                    var a = document.createElement("a");
+                    a.href = `data:image/png;base64,${base64Image}`;
+                    a.download = `wordcloud_${currentUnixTime}.png`;
+                    a.click();
+                };
+                bonusButtons.appendChild(downloadButton);
+
+                // Create a copy button
+                var copyButton = document.createElement("button");
+                copyButton.innerHTML = "Copy";
+                copyButton.id = "copyButton";
+                copyButton.onclick = function() {
+                    // Convert base64 to raw binary data held in a string
+                    var byteString = atob(base64Image);
+                
+                    // Write the bytes of the string to an ArrayBuffer
+                    var ab = new ArrayBuffer(byteString.length);
+                    var ia = new Uint8Array(ab);
+                    for (var i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+                
+                    // Create a blob from the ArrayBuffer
+                    var blob = new Blob([ab], {type: 'image/png'});
+                
+                    // Use the Clipboard API to copy the blob
+                    navigator.clipboard.write([
+                        new ClipboardItem({
+                            'image/png': blob
+                        })
+                    ]).then(function() {
+                        window.alert("Your word cloud has been copied to your clipboard! Have a nice day!");
+                    }, function(err) {
+                        console.error('Could not copy text! Please copy manually and report this as an issue on GitHub (the bottom of the page).', err);
+                    });
+                };
+                bonusButtons.appendChild(copyButton);
+
+
             } else {
                 shouldStop = true;
                 // get json "message" field if it exists, otherwise use the status text

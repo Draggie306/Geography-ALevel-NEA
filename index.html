@@ -15,9 +15,7 @@
     <p><br>This web interface was created for easy word cloud generation. Enter your words below.<br><br>You can separate your words with commas, spaces, or new lines.<br><br>Click generate to create your unique word cloud.<br>Customise dimensions for high-res images, or prefer faster generation.<br><br>Whether it's for educational purposes (such as a Geography A level NEA), creative projects, or data analysis, our word cloud generator has you covered.</p>
     </p>
     <h2>See examples below</h2>
-    <p>Wordcloud example 1: <a href="lily_cloud.png">here</a></p>
-    <p>Wordcloud example 2: <a href="chili_cloud.png">here</a></p>
-    <p>Wordcloud example 3: <a href="riverside_cloud.png">here</a></p>
+    <p>Wordcloud <a href="lily_cloud.png">example 1</a>, <a href="chili_cloud.png">example 2</a>, <a href="riverside_cloud.png">example 3</a></p>
     <form>
         <label for="data_text">Enter Words for Word Cloud:</label>
         <textarea id="data_text" name="data_text" placeholder="Type or paste your words here"></textarea>
@@ -28,15 +26,18 @@
         <label for="max_font_size">Max Font Size:</label>
         <p><i>The size of the largest word in the cloud depends on its occurrences in the input data.</i></p>
         <input type="number" id="max_font_size" name="max_font_size" value="300">
-        <label for="lambda_color_func">[Advanced] Lambda Colour Function:</label>
-        <input type="text" id="lambda_func" class="noInputAllowed" name="lambda_func" value='lambda *args, **kwargs: "hsl(330, 100%%, %d%%)" % random.randint(50, 80)'>
+        <label for="colorPicker">[Advanced] Choose a colour!</label>
+        <div id="colorPickerContainer"></div>
+        <label for="colorPickerVariation">[Advanced] Choose colour variation %!</label>
+        <div id="colorPickerVariationContainer"></div>
         <button type="submit">Generate Word Cloud</button>
     </form>
     <div id="loading">
         <p id="loading_text"></p>
     </div>  
     <div id="output"><p>Your word cloud will appear here</p></div>
-
+    <div id="bonusButtons" style="flex: 1; display: flex; flex-direction: row; justify-content: space-evenly; align-items: center; margin-bottom: 20px;"></div>
+    
     <section id="footer">
         <p>Open-source project available on <a href="https://github.com/Draggie306/Geography-ALevel-NEA">GitHub!</a></p>
     </section>
