@@ -1,0 +1,14 @@
+[Unit]
+Description=Wordcloud Generator server service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=draggie
+ExecStart=/home/draggie/Geography-ALevel-NEA/run.sh
+WorkingDirectory=/home/draggie/Geography-ALevel-NEA
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 import re
 import datetime
+import io
 import random
 import traceback
 import base64
@@ -14,6 +15,8 @@ from flask import Flask, request, jsonify
 data = []
 
 repl_save = True
+
+print("Initialising word cloud generator")
 
 # Change below depending on what you need (resolution of wordcloud)
 # For an 8K monitor this is "width=7680, height=4320"
@@ -123,6 +126,10 @@ def generate_word_cloud():
 
         # uuid_to_use = uuid.uuid4()
         # TODO: Change from uuid to time + DateTime
+        """
+    
+        # Old code
+        
         uuid_to_use = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
         if not repl_save:
@@ -132,10 +139,16 @@ def generate_word_cloud():
             print(f'Saving on filesystem in generations folder as "{uuid_to_use}"')
             wordcloud.to_file(f"generations/python_wordcloud_{uuid_to_use}.png")
 
-        base64wordcloud = base64.b64encode(open(f"generations/python_wordcloud_{uuid_to_use}.png",'rb').read())
-        base64wordcloud = base64wordcloud.decode('utf-8')
+        # base64wordcloud = base64.b64encode(open(f"generations/python_wordcloud_{uuid_to_use}.png",'rb').read())
+        # base64wordcloud = base64wordcloud.decode('utf-8')
+        """
 
-        print("Action performed successfully")
+        img_io = io.BytesIO()
+        wordcloud.to_image().save(img_io, 'PNG')
+        img_io.seek(0)
+        base64wordcloud = base64.b64encode(img_io.read()).decode('utf-8')
+
+        print(f"Word cloud generated successfully at time {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         return jsonify({
             "error": False,
             "message": "Successfully generated word cloud",
@@ -156,4 +169,10 @@ def go_away():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=random.randint(2000, 9000))
+    print("Starting server")
+    try:
+        app.run(host='0.0.0.0', port=49763)
+    except Exception as e:
+        print(e)
+        print(traceback.format_exc())
+        input("Press enter to exit")
